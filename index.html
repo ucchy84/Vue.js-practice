@@ -7,18 +7,15 @@
   <body>
     <h1>Vue.js</h1>
     <div id="app">
-      <hello/>
+      <div><hello name="Taro" /></div>
+      <div><hello name="Hanako" /></div>
     </div>
 
     <script>
       Vue.component('hello',
       {
-        data:function() {
-          return {
-            mesage: 'これは新しいメッセージです'
-          };
-        },
-        template: '<p class="hello">{{mesage}}</p>',
+        props: ['name'],
+        template: '<p class="hello">Hello! {{name}}</p>',
       });
 
       var app = new Vue({
