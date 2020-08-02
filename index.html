@@ -7,31 +7,41 @@
   <body>
     <h1>Vue.js</h1>
     <div id="app">
-      <hello v-for="item in data" v-bind:name="item" />
+      <hello />
     </div>
 
     <script>
-      Vue.component('hello',
+      var hello = Vue.component('hello',
       {
-        props: ['name'],
-        template: '<p class="hello">Hello! {{name}}</p>',
-      });
+        data:function() {
+          return {
+            num: 0,
+            message: 'type a number.',
+          };
+        },
+
+        methods: {
+          calc:function(event) {
+            var total = 0;
+            for(var i=1;i<=this.num;i++){
+              total += i;
+            }
+            this.message = "total:" +total;
+          }
+        },
+
+        template: '<div><p class="hello">{{message}}</p><div><input type="number" v-on:input="calc" v-model="num"></div></div>'
+      })
 
       var app = new Vue({
         el: '#app',
-        data: {
-          data:['Taro', 'Hanako', 'Sachiko', 'Jiro']
-        }
       });
     </script>
 
     <style>
-      .hello {
-        font-size: 20pt;
-        font-weight: bold;
-        border: 1px solid magenta;
-        padding: 5px 10px 0px 10px;
-        margin: 10px;
+      .red {
+        color: white;
+        background-color: red;
       }
     </style>
   </body>
